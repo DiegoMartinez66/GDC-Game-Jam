@@ -16,7 +16,7 @@ public class ChasePlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         MoveTowardPlayer();
     }
