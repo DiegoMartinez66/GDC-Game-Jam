@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     static public Player Instance;
     public Rigidbody2D rb;
     public SpriteRenderer spriteRenderer;
-    public GameObject spotlight;
     public float speed;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +20,6 @@ public class Player : MonoBehaviour
     {
         MovePlayer();
         RotatePlayer();
-        SetSpotlightPosition();
     }
     /// <summary>
     /// Thomas Roman 10/26/2024
@@ -54,15 +52,5 @@ public class Player : MonoBehaviour
             spriteRenderer.flipX= false;
             transform.Rotate(new Vector3(0, 0, 90));
         }
-    }
-
-    /// <summary>
-    /// Thomas Roman 10/26/2024
-    /// Moves the spotlight to the mouse position
-    /// </summary>
-    void SetSpotlightPosition()
-    {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        spotlight.transform.position = new Vector3(mousePos.x, mousePos.y, 0.0f);
     }
 }
