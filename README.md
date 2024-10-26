@@ -1,1 +1,1 @@
-# GDC-Game-Jam
+# GDC-Game-Jam Fall 2024
