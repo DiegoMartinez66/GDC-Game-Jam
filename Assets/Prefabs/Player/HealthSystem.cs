@@ -20,7 +20,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (IsDead) 
         {
-            //SceneManager.LoadScene("");
+            SceneManager.LoadScene("LoseScreen");
         }
     }
 

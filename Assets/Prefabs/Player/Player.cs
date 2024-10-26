@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb;
     public SpriteRenderer spriteRenderer;
     public float speed;
+    public float bulletSpeed=8;
+    public GameObject projectilePrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class Player : MonoBehaviour
     {
         MovePlayer();
         RotatePlayer();
+        Shoot();
     }
     /// <summary>
     /// Thomas Roman 10/26/2024
@@ -51,6 +54,19 @@ public class Player : MonoBehaviour
         {
             spriteRenderer.flipX= false;
             transform.Rotate(new Vector3(0, 0, 90));
+        }
+    }
+    void Shoot()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+            Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
+            Vector2 direction = target - myPos;
+            direction.Normalize();
+            Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+            GameObject projectile = Instantiate(projectilePrefab, myPos, rotation);
+            projectile.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
         }
     }
 }
