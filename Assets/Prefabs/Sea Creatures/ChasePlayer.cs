@@ -21,13 +21,13 @@ public class ChasePlayer : MonoBehaviour
     {
         if (stunDuration > 0)
         {
-            MoveTowardPlayer();
-        }
-        else
-        {
             // critter is stunned, freeze all movement
             rb.velocity = Vector3.zero;
             stunDuration -= Time.deltaTime;
+        }
+        else
+        {
+            MoveTowardPlayer();
         }
     }
 

@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 2118192952765589611}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -403,6 +403,7 @@ MonoBehaviour:
   textMesh: {fileID: 7007588757425816013}
   health: 0
   shootPoint: {fileID: 5713480144058628264}
+  respawnCords: {x: 0, y: 0, z: 0}
 --- !u!70 &2118192952765589611
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
