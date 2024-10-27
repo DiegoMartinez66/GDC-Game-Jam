@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
          ChasePlayer enemy = other.GetComponent<ChasePlayer>();
          if (enemy != null)
          {
-            other.GetComponent<ChasePlayer>().Stun(5000);
+            other.GetComponent<ChasePlayer>().Stun(5);
          }
     }
 }
