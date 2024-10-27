@@ -35,8 +35,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         MovePlayer();
-        RotatePlayer();
-        Shoot();
+        if (Time.timeScale > 0) {
+            RotatePlayer();
+            Shoot();
+}
         UpdateHealth();
 
         if (invincibilityDuration > 0)
@@ -127,7 +129,7 @@ public class Player : MonoBehaviour
         textMesh.text = "Health: " + health.ToString();
     }
 
-    void Respawn()
+    public void Respawn()
     {
         this.transform.position = respawnCords;
         this.health = maxHealth;

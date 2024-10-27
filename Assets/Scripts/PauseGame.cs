@@ -7,6 +7,7 @@ public class PauseGame : MonoBehaviour
     public bool paused = false;
     public Canvas pauseScreen;
     public Button resumeButton, restartButton, quitButton;
+    public GameObject player;
 
 
     // Start is called before the first frame update
@@ -49,25 +50,44 @@ public class PauseGame : MonoBehaviour
     /// <returns></returns>
     void UpdateCursorState()
     {
-        Cursor.visible = paused;
-        Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
+        if (paused)
+        {
+            //only shows mouse if game is paused
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            //doesnt work if escape is hit to unpause bc unity editor shenanigans
+            Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     public void TogglePause()
     {
         paused = !paused;
         pauseScreen.enabled = paused;
-        Time.timeScale = paused ? 0f : 1f;
+        if (paused == true)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     public void Respawn()
     {
-        //move player to checkpoint
+        TogglePause();
+        player.GetComponent<Player>().Respawn();
     }
 
     public void QuitToMenu()
     {
         TogglePause();
+        UpdateCursorState();
         SceneManager.LoadScene("StartScreen");
     }
 }
