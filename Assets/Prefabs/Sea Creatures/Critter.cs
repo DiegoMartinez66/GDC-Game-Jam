@@ -83,10 +83,5 @@ public class Critter : MonoBehaviour
         {
             other.GetComponent<Player>().TakeDamage(1);
         }
-        Critter enemy = other.GetComponent<Critter>();
-        if (enemy != null)
-        {
-            other.GetComponent<Critter>().Stun(5);
-        }
     }
 }
