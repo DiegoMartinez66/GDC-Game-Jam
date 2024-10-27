@@ -76,4 +76,17 @@ public class Critter : MonoBehaviour
     {
         this.stunDuration = stunLength;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<Player>().TakeDamage(1);
+        }
+        Critter enemy = other.GetComponent<Critter>();
+        if (enemy != null)
+        {
+            other.GetComponent<Critter>().Stun(5);
+        }
+    }
 }

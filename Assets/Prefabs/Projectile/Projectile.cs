@@ -17,10 +17,10 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
-         ChasePlayer enemy = other.GetComponent<ChasePlayer>();
+         Critter enemy = other.GetComponent<Critter>();
          if (enemy != null)
          {
-            other.GetComponent<ChasePlayer>().Stun(5);
+            other.GetComponent<Critter>().Stun(5);
          }
     }
 }
