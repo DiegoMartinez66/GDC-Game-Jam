@@ -9,6 +9,7 @@ public class ChasePlayer : MonoBehaviour
     public float lookRadius;
     public float lookSpeed;
     public float speed;
+    private float stunDuration = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,16 @@ public class ChasePlayer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        MoveTowardPlayer();
+        if (stunDuration > 0)
+        {
+            MoveTowardPlayer();
+        }
+        else
+        {
+            // critter is stunned, freeze all movement
+            rb.velocity = Vector3.zero;
+            stunDuration -= Time.deltaTime;
+        }
     }
 
     /// <summary>
@@ -67,5 +77,14 @@ public class ChasePlayer : MonoBehaviour
             }
         }
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * lookSpeed);
+    }
+
+    /// <summary>
+    /// Thomas Roman 10/26/2024
+    /// Prevents the critter from moving for a bit
+    /// </summary>
+    void Stun(float stunLength)
+    {
+        this.stunDuration = stunLength;
     }
 }

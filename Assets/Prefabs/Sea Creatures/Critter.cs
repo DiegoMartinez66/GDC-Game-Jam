@@ -11,6 +11,7 @@ public class Critter : MonoBehaviour
     public float lookRadius;
     public float frameDuration;
     public float speed;
+    private float stunDuration = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +22,19 @@ public class Critter : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         AnimateCritter();
-        MoveTowardPlayer();
+        if (stunDuration > 0)
+        {
+            MoveTowardPlayer();
+        } else
+        {
+            // critter is stunned, freeze all movement
+            rb.velocity = Vector3.zero;
+            stunDuration -= Time.deltaTime;
+        }
+
     }
     /// <summary>
     /// Thomas Roman 10/26/2024
@@ -56,5 +66,14 @@ public class Critter : MonoBehaviour
             Vector2 movement = distanceToPlayer.normalized * speed;
             rb.velocity = movement;
         }
+    }
+
+    /// <summary>
+    /// Thomas Roman 10/26/2024
+    /// Prevents the critter from moving for a bit
+    /// </summary>
+    void Stun(float stunLength)
+    {
+        this.stunDuration = stunLength;
     }
 }
