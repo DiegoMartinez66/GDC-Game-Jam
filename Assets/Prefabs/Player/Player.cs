@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     public int health;
     public Transform shootPoint;
     public Vector3 respawnCords;
+    private float invincibilityDuration = 0;
+    private float invincibilityTime = 3.0f;  // 3 seconds of invincibility
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +38,11 @@ public class Player : MonoBehaviour
         RotatePlayer();
         Shoot();
         UpdateHealth();
+
+        if (invincibilityDuration > 0)
+        {
+            invincibilityDuration -= Time.deltaTime;
+        }
     }
     /// <summary>
     /// Thomas Roman 10/26/2024
@@ -98,11 +106,19 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if(invincibilityDuration > 0)
+        {
+            return;
+        }
         health -= damage;
         if (health <= 0)
         {
             Debug.Log("Taken Damage");
             Respawn();
+        }
+        else
+        {
+            invincibilityDuration = invincibilityTime;  // Start invincibility period
         }
     }
 
@@ -115,5 +131,6 @@ public class Player : MonoBehaviour
     {
         this.transform.position = respawnCords;
         this.health = maxHealth;
+        invincibilityDuration = invincibilityTime;
     }
 }
