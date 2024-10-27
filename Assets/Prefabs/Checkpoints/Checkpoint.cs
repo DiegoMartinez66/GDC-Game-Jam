@@ -6,6 +6,7 @@ public class Checkpoint : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public Sprite checkpointActive;
+    public AudioSource checkpointAudioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            checkpointAudioSource.Play();
             spriteRenderer.sprite = checkpointActive;
             Player.Instance.respawnCords = this.transform.position;
             Player.Instance.health = 10;
