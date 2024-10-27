@@ -402,7 +402,8 @@ MonoBehaviour:
   bulletSpeed: 8
   projectilePrefab: {fileID: 8503255160642442565, guid: b66987cecb18bfb42a422ba900c8ca64, type: 3}
   textMesh: {fileID: 7007588757425816013}
-  health: 0
+  maxHealth: 10
+  health: 10
   shootPoint: {fileID: 5713480144058628264}
   respawnCords: {x: 0, y: 0, z: 0}
 --- !u!70 &2118192952765589611

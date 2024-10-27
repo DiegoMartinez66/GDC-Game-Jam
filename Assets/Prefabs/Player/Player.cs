@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public float bulletSpeed=15;
     public GameObject projectilePrefab;
     public TextMeshProUGUI textMesh;
+    public int maxHealth;
     public int health;
     public Transform shootPoint;
     public Vector3 respawnCords;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
         Instance = this;
         UpdateHealth();
         respawnCords = this.transform.position;
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -91,10 +93,20 @@ public class Player : MonoBehaviour
     void TakeDamage(int damage)
     {
         health -= damage;
+        if (health <= 0)
+        {
+            Respawn();
+        }
     }
 
     void UpdateHealth()
     {
         textMesh.text = "Health: " + health.ToString();
+    }
+
+    void Respawn()
+    {
+        this.transform.position = respawnCords;
+        this.health = maxHealth;
     }
 }
