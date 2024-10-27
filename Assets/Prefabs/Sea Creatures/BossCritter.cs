@@ -5,6 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class BossCritter : MonoBehaviour
 {
+    public AudioSource bossAudio;
     static public BossCritter Instance;
     public Rigidbody2D rb;
     public SpriteRenderer spriteRenderer;
@@ -45,6 +46,7 @@ public class BossCritter : MonoBehaviour
     /// </summary>
     void ShootPlayer()
     {
+        bossAudio.Play();
         Vector2 target = Player.Instance.transform.position;
         Vector2 myPos = transform.position;
         Vector2 direction = target - myPos;
