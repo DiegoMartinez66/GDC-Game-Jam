@@ -82,6 +82,8 @@ public class Player : MonoBehaviour
             direction.Normalize();
             Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
             GameObject projectile = Instantiate(projectilePrefab, myPos, rotation);
+            Projectile projectileScript = projectile.GetComponent<Projectile>();
+            projectileScript.isCritterBullet = false;
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
