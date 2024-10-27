@@ -115,6 +115,5 @@ public class Player : MonoBehaviour
     {
         this.transform.position = respawnCords;
         this.health = maxHealth;
-       // BossCritter.Instance.health = BossCritter.Instance.maxHealth;
     }
 }

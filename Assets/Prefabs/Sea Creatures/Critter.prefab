@@ -116,7 +116,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0037511599, y: 0.0054886937}
@@ -199,7 +199,7 @@ MonoBehaviour:
   - {fileID: 906751392, guid: 8654b5e0f56e34846825f681a707d992, type: 3}
   rb: {fileID: 49309477209120687}
   spriteRenderer: {fileID: 1039861289987385336}
-  lookRadius: 7
+  lookRadius: 12
   frameDuration: 1
   speed: 3
 --- !u!50 &49309477209120687
