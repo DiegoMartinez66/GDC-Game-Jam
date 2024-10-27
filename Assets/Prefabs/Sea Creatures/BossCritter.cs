@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class BossCritter : MonoBehaviour
 {
@@ -18,10 +17,12 @@ public class BossCritter : MonoBehaviour
     public int health;
     public float maxDelay;
     public float fireDelay;
+
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -29,17 +30,20 @@ public class BossCritter : MonoBehaviour
     {
         MoveTowardPlayer();
         Vector2 distanceToPlayer = Player.Instance.rb.position - rb.position;
-        // compare time with the duration of each frame
+
+        // Decrease fire delay timer
         if (fireDelay > 0)
         {
             fireDelay -= Time.deltaTime;
-        } else if (distanceToPlayer.magnitude < lookRadius)
+        }
+        else if (distanceToPlayer.magnitude < lookRadius)
         {
             ShootBarrage();
             ShootPlayer();
             fireDelay = maxDelay;
         }
     }
+
     /// <summary>
     /// Jimmy Williams and Thomas Roman 10/26/2024
     /// A targeted shot
@@ -61,6 +65,7 @@ public class BossCritter : MonoBehaviour
             rb.velocity = direction * bulletSpeed;
         }
     }
+
     /// <summary>
     /// Jimmy Williams and Thomas Roman 10/26/2024
     /// An omnidirectional attack pattern 
@@ -70,7 +75,7 @@ public class BossCritter : MonoBehaviour
         for (int i = 1; i <= numberOfBulletsInBarrage; i++)
         {
             Vector2 myPos = transform.position;
-            Vector2 direction = new Vector2(Mathf.Cos(2*Mathf.PI/i), Mathf.Sin(2 * Mathf.PI / i));
+            Vector2 direction = new Vector2(Mathf.Cos(2 * Mathf.PI / i), Mathf.Sin(2 * Mathf.PI / i));
             direction.Normalize();
             Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
             GameObject projectile = Instantiate(projectilePrefab, myPos, rotation);
@@ -90,12 +95,35 @@ public class BossCritter : MonoBehaviour
     /// </summary>
     void MoveTowardPlayer()
     {
-        // calculate the vector to the player
         Vector2 distanceToPlayer = Player.Instance.rb.position - rb.position;
         if (distanceToPlayer.magnitude < lookRadius)
         {
             Vector2 movement = distanceToPlayer.normalized * speed;
             rb.velocity = movement;
         }
+    }
+
+    /// <summary>
+    /// Applies damage to the boss and checks if health has reached zero.
+    /// </summary>
+    /// <param name="damageAmount">Amount of damage to apply.</param>
+    public void TakeDamage(int damageAmount)
+    {
+        Debug.Log("Damage");
+        health -= damageAmount;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    /// <summary>
+    /// Handles the boss's death logic.
+    /// </summary>
+    void Die()
+    {
+        // You can add death animations, sound effects, or other cleanup logic here
+        Destroy(gameObject);
+        Debug.Log("Dead");
     }
 }

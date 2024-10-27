@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private float speed;
+    public float speed;
+    public int damage = 1; // Amount of damage the projectile deals
     public bool isCritterBullet;
+
     // Update is called once per frame
     void Update()
     {
@@ -20,19 +22,28 @@ public class Projectile : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+
             Critter enemy = other.GetComponent<Critter>();
             if (enemy != null)
             {
-                other.GetComponent<Critter>().Stun(5);
+                enemy.Stun(5);
+                Destroy(gameObject);
             }
-        } else
+
+            BossCritter boss = other.GetComponent<BossCritter>();
+            if (boss != null)
+            {
+                boss.TakeDamage(damage); // Apply damage to the BossCritter
+                Destroy(gameObject); // Destroy the projectile upon collision
+            }
+        }
+        else
         {
             if (other.CompareTag("Player"))
             {
-                Player.Instance.TakeDamage(1);
+                Player.Instance.TakeDamage(damage);
                 Destroy(gameObject);
             }
         }
-
     }
 }
