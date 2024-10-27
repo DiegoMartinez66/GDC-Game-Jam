@@ -15,11 +15,13 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI textMesh;
     public int health;
     public Transform shootPoint;
+    public Vector3 respawnCords;
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
         UpdateHealth();
+        respawnCords = this.transform.position;
     }
 
     // Update is called once per frame
