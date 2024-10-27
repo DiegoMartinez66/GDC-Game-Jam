@@ -6,6 +6,7 @@ using UnityEngine.Animations;
 
 public class Player : MonoBehaviour
 {
+    public AudioSource AudioClip;
     static public Player Instance;
     public Rigidbody2D rb;
     public SpriteRenderer spriteRenderer;
@@ -77,6 +78,8 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            AudioClip.Play();
+
             Vector2 target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
             Vector2 myPos = shootPoint.position;
             Vector2 direction = target - myPos;
