@@ -12,6 +12,8 @@ public class SceneLoader : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         resumeButton.onClick.AddListener(LoadFirstLevel);
         quitButton.onClick.AddListener(Quit);
         loading.text = "";
