@@ -83,7 +83,7 @@ public class ChasePlayer : MonoBehaviour
     /// Thomas Roman 10/26/2024
     /// Prevents the critter from moving for a bit
     /// </summary>
-    void Stun(float stunLength)
+    public void Stun(float stunLength)
     {
         this.stunDuration = stunLength;
     }

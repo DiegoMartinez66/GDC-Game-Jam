@@ -5,12 +5,22 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private float speed;
-    private Rigidbody rb;
     // Update is called once per frame
     void Update()
     {
-        //transform.Translate(Vector2.up * speed * Time.deltaTime);
-
         Destroy(gameObject, 5f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Fish")) 
+        {
+            Destroy(gameObject);
+        }
+         ChasePlayer enemy = other.GetComponent<ChasePlayer>();
+         if (enemy != null)
+         {
+            other.GetComponent<ChasePlayer>().Stun(5000);
+         }
     }
 }

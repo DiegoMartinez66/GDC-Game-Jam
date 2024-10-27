@@ -6,10 +6,7 @@ public class PauseGame : MonoBehaviour
 {
     public bool paused = false;
     public Canvas pauseScreen;
-    public Button resumeButton;
-    public Button restartButton;
-    public Button quitButton;
-    public GameObject car;
+    public Button resumeButton, restartButton, quitButton;
 
 
     // Start is called before the first frame update
@@ -37,23 +34,12 @@ public class PauseGame : MonoBehaviour
             TogglePause();
         }
 #else
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)||Input.GetKeyDown(KeyCode.P))
         {
             TogglePause();
         }
 #endif
-        if (paused)
-        {
-            //only shows mouse if game is paused
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            //doesnt work if escape is hit to unpause bc unity editor shenanigans
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+        UpdateCursorState();
     }
 
 
@@ -61,47 +47,27 @@ public class PauseGame : MonoBehaviour
     /// toggles and shows pause screen
     /// </summary>
     /// <returns></returns>
+    void UpdateCursorState()
+    {
+        Cursor.visible = paused;
+        Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+
     public void TogglePause()
     {
         paused = !paused;
         pauseScreen.enabled = paused;
-        if (paused == true)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
+        Time.timeScale = paused ? 0f : 1f;
     }
 
     public void Respawn()
     {
-        // Reset the car's position to the origin (or any specific respawn point)
-        car.transform.position = Vector3.zero;
-
-        // Reset the car's rotation to zero (upright position)
-        car.transform.rotation = Quaternion.identity;
-
-        // Optionally, reset the car's Rigidbody velocity to prevent it from continuing its motion after respawn
-        Rigidbody carRigidbody = car.GetComponent<Rigidbody>();
-        if (carRigidbody != null)
-        {
-            carRigidbody.velocity = Vector3.zero;
-            carRigidbody.angularVelocity = Vector3.zero;
-        }
-
-        // Unpause the game if needed
-        paused = false;
-        Time.timeScale = 1f;
-        pauseScreen.enabled = paused;
+        //move player to checkpoint
     }
 
     public void QuitToMenu()
     {
-        paused = false;
-        Time.timeScale = 1f;
-        pauseScreen.enabled = paused;
+        TogglePause();
         SceneManager.LoadScene("StartScreen");
     }
 }
