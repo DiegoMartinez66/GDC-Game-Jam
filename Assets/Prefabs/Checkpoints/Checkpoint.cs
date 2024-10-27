@@ -28,6 +28,7 @@ public class Checkpoint : MonoBehaviour
         {
             spriteRenderer.sprite = checkpointActive;
             Player.Instance.respawnCords = this.transform.position;
+            Player.Instance.health = 10;
         }
     }
 }

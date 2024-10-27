@@ -345,7 +345,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: da81be9a97d06fc49b06fc3d8acda77f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 328d7379ba3fbe84db6e55232024029a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -402,7 +402,8 @@ MonoBehaviour:
   bulletSpeed: 8
   projectilePrefab: {fileID: 8503255160642442565, guid: b66987cecb18bfb42a422ba900c8ca64, type: 3}
   textMesh: {fileID: 7007588757425816013}
-  health: 0
+  maxHealth: 10
+  health: 10
   shootPoint: {fileID: 5713480144058628264}
   respawnCords: {x: 0, y: 0, z: 0}
 --- !u!70 &2118192952765589611
