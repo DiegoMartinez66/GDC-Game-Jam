@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Include SceneManagement for scene loading
 
 public class BossCritter : MonoBehaviour
 {
@@ -18,20 +19,17 @@ public class BossCritter : MonoBehaviour
     public float maxDelay;
     public float fireDelay;
 
-    // Start is called before the first frame update
     void Start()
     {
         Instance = this;
         health = maxHealth;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         MoveTowardPlayer();
         Vector2 distanceToPlayer = Player.Instance.rb.position - rb.position;
 
-        // Decrease fire delay timer
         if (fireDelay > 0)
         {
             fireDelay -= Time.deltaTime;
@@ -44,10 +42,6 @@ public class BossCritter : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Jimmy Williams and Thomas Roman 10/26/2024
-    /// A targeted shot
-    /// </summary>
     void ShootPlayer()
     {
         bossAudio.Play();
@@ -66,10 +60,6 @@ public class BossCritter : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Jimmy Williams and Thomas Roman 10/26/2024
-    /// An omnidirectional attack pattern 
-    /// </summary>
     void ShootBarrage()
     {
         for (int i = 1; i <= numberOfBulletsInBarrage; i++)
@@ -89,10 +79,6 @@ public class BossCritter : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Thomas Roman 10/26/2024
-    /// Chases the player if the player is within its sight radius
-    /// </summary>
     void MoveTowardPlayer()
     {
         Vector2 distanceToPlayer = Player.Instance.rb.position - rb.position;
@@ -103,13 +89,8 @@ public class BossCritter : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Applies damage to the boss and checks if health has reached zero.
-    /// </summary>
-    /// <param name="damageAmount">Amount of damage to apply.</param>
     public void TakeDamage(int damageAmount)
     {
-        Debug.Log("Damage");
         health -= damageAmount;
         if (health <= 0)
         {
@@ -117,13 +98,9 @@ public class BossCritter : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Handles the boss's death logic.
-    /// </summary>
     void Die()
     {
-        // You can add death animations, sound effects, or other cleanup logic here
-        Destroy(gameObject);
-        Debug.Log("Dead");
+        // Load the win scene when the boss is defeated
+        SceneManager.LoadScene("WinScreen"); 
     }
 }
