@@ -77,12 +77,11 @@ public class Critter : MonoBehaviour
         this.stunDuration = stunLength;
     }
 
-     void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("collision");
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<Player>().TakeDamage(1);
+            other.GetComponent<Player>().TakeDamage(1);
         }
     }
 }
