@@ -27,11 +27,12 @@ public class BossCritter : MonoBehaviour
     void FixedUpdate()
     {
         MoveTowardPlayer();
+        Vector2 distanceToPlayer = Player.Instance.rb.position - rb.position;
         // compare time with the duration of each frame
         if (fireDelay > 0)
         {
             fireDelay -= Time.deltaTime;
-        } else
+        } else if (distanceToPlayer.magnitude < lookRadius)
         {
             ShootBarrage();
             ShootPlayer();

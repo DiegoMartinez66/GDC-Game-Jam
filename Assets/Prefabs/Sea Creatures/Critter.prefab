@@ -200,8 +200,8 @@ MonoBehaviour:
   rb: {fileID: 49309477209120687}
   spriteRenderer: {fileID: 1039861289987385336}
   lookRadius: 7
-  frameDuration: 3
-  speed: 1
+  frameDuration: 1
+  speed: 3
 --- !u!50 &49309477209120687
 Rigidbody2D:
   serializedVersion: 4
