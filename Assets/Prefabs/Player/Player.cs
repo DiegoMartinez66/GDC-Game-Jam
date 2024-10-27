@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb;
     public SpriteRenderer spriteRenderer;
     public float speed;
+    public float altSpeed;
     public float bulletSpeed=15;
     public GameObject projectilePrefab;
     public TextMeshProUGUI textMesh;
@@ -40,7 +41,13 @@ public class Player : MonoBehaviour
         // set the players velocity to the input direction times the speed
         Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         movement.Normalize();
-        rb.velocity = movement * speed;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            rb.velocity = movement * altSpeed;
+        } else
+        {
+            rb.velocity = movement * speed;
+        }
     }
     /// <summary>
     /// Thomas Roman 10/26/2024
