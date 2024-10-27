@@ -17,7 +17,7 @@ public class Critter : MonoBehaviour
     void Start()
     {
         // a random even index
-        critterIndex = 2 * Random.Range(0, (int)Mathf.Floor(sprites.Length-1 / 2));
+        critterIndex = 2 * Random.Range(0, (int)Mathf.Floor((sprites.Length-1) / 2));
         spriteRenderer.sprite=sprites[critterIndex];
     }
 
